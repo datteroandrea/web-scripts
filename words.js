@@ -9,11 +9,21 @@ async function fetchTextContent(url) {
   $("script, style, noscript, head").remove();
 
   // Get all visible text
-  const text = $("body")
-    .text()
-    .replace(/\s+/g, " ")
-    .split(" ");
-  return text;
+  const texts = [];
+  $("p, h1, h2, h3, h4, h5, h6, li, a, span, strong, em").each((_, el) => {
+    const t = $(el).text().trim();
+    if (t) texts.push(t);
+  });
+
+  $("body")
+    .contents()
+    .each((_, node) => {
+      if (node.type === "text") {
+        const t = $(node).text().replace(/\s+/g, " ").trim();
+        if (t) texts.push(t);
+      }
+    });
+  return texts.join(" ").split(" ");
 }
 
 async function main() {
