@@ -47,7 +47,7 @@ async function crawl(url, baseDomain, parent) {
 async function main() {
   const startUrl = process.argv[2];
   if (!startUrl) {
-    console.error("Usage: node broken-links.js <homepage-url>");
+    console.error("Usage: node links.js <homepage-url>");
     process.exit(1);
   }
 
